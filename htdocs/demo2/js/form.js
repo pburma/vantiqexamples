@@ -8,7 +8,7 @@ var vantiq = new Vantiq({
     apiVersion: 1
 });
 
-vantiq.accessToken = "8D79h2jxhQOjwfpc8bEYT3cXCnX2lyaDFEjwTg_VhbM=";
+vantiq.accessToken = "";
 
 //Note that in version 4 of express, express.bodyParser() was
 //deprecated in favor of a separate 'body-parser' module.
