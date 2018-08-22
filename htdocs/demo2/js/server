@@ -17,8 +17,8 @@ app.use(myParser.urlencoded({extended : true}));
 app.use(myParser.json());
 
 //Cors settings
-//app.use(cors({origin: 'null'}));
-app.use(cors({origin: 'http://localhost:8000'}));
+app.use(cors({origin: 'null'}));
+//app.use(cors({origin: 'http://localhost:8000'}));
 
 // start the express web server listening on 8080
 app.listen(8080, () => {
@@ -62,8 +62,7 @@ app.post('/select', (req, res) => {
     })
   }
   else {
-    res.send('{ERROR} Missing or badly formed data sent: ' + JSON.stringify(req.body) + '\n' + '{ERROR} Parameter resource not found.');
-    //res.sendStatus(400);
+    res.sendStatus(400);
   }
 });
 ////END SELECT////
@@ -98,8 +97,7 @@ app.post('/selectone', (req, res) => {
     })
   }
   else {
-    res.send('{ERROR} Missing or badly formed data sent: ' + JSON.stringify(req.body) + '\n' + '{ERROR} Parameter resource not found.');
-    //res.sendStatus(400);
+    res.sendStatus(400);
   }
 });
 ////END SELECTONE////
@@ -133,8 +131,7 @@ app.post('/count', (req, res) => {
     })
   }
   else {
-    res.send('{ERROR} Missing or badly formed data sent: ' + JSON.stringify(req.body) + '\n' + '{ERROR} Parameter resource not found.');
-    //res.sendStatus(400);
+    res.sendStatus(400);
   }
 });
 ////END COUNT////
@@ -169,8 +166,7 @@ app.post('/insert', (req, res) => {
     })
   }
   else {
-    res.send('{ERROR} Missing or badly formed data sent: ' + JSON.stringify(req.body) + '\n' + '{ERROR} Parameter resource not found.');
-    //res.sendStatus(400);
+    res.sendStatus(400);
   }
 });
 ////END INSERT////
@@ -206,8 +202,7 @@ app.post('/update', (req, res) => {
     })
   }
   else {
-    res.send('{ERROR} Missing or badly formed data sent: ' + JSON.stringify(req.body) + '\n' + '{ERROR} Parameter resource not found.');
-    //res.sendStatus(400);
+    res.sendStatus(400);
   }
 });
 ////END UPDATE////
@@ -243,8 +238,7 @@ app.post('/upsert', (req, res) => {
     })
   }
   else {
-    res.send('{ERROR} Missing or badly formed data sent: ' + JSON.stringify(req.body) + '\n' + '{ERROR} Parameter resource not found.');
-    //res.sendStatus(400);
+    res.sendStatus(400);
   }
 });
 ////END UPSERT////
@@ -277,8 +271,7 @@ app.post('/delete', (req, res) => {
     })
   }
   else {
-    res.send('{ERROR} Missing or badly formed data sent: ' + JSON.stringify(req.body) + '\n' + '{ERROR} Parameter resource not found.');
-    //res.sendStatus(400);
+    res.sendStatus(400);
   }
 });
 ////END DELETE////
@@ -314,8 +307,7 @@ app.post('/execute', (req, res) => {
     })
   }
   else {
-    res.send('{ERROR} Missing or badly formed data sent: ' + JSON.stringify(req.body) + '\n' + '{ERROR} Parameter procedure not found.');
-    //res.sendStatus(400);
+    res.sendStatus(400);
   }
 });
 ////END EXECUTE////
@@ -352,15 +344,14 @@ app.post('/publish', (req, res) => {
      })
    }
    else {
-     res.send('{ERROR} Missing or badly formed data sent: ' + JSON.stringify(req.body) + '\n' + '{ERROR} Parameters resource, id and payload are all required.');
-     //res.sendStatus(400);
+     res.sendStatus(400);
    }
 });
 ////END PUBLISH////
 
 ////START UPLOAD////
-function upload(file, contentType, docpath, callback){
-  vantiq.upload(file, contentType, docpath)
+function upload(name, fileType, content, callback){
+  vantiq.upload(name, fileType, content)
     .then((result) => {
       console.log("Published message successfully.");
       if(callback) {
@@ -373,11 +364,11 @@ function upload(file, contentType, docpath, callback){
 }
 
 app.post('/upload', (req, res) => {
-  var file = req.body.file;
-  var contentType = req.body.contentType;
-  var docpath = req.body.docpath;
-   if(file && contentType &&  docpath){
-     upload(file, contentType, docpath, function(response){
+  var name = req.body.name;
+  var fileType = req.body.fileType;
+  var content = req.body.content;
+   if(name){
+     upload(name, fileType, content, function(response){
          if(response) {
            res.send(response);
          }
@@ -387,8 +378,7 @@ app.post('/upload', (req, res) => {
      })
    }
    else {
-     res.send('{ERROR} Missing or badly formed data sent: ' + JSON.stringify(req.body) + '\n' + '{ERROR} Parameters file, contentType and docpath are all required.');
-     //res.sendStatus(400);
+     res.sendStatus(400);
    }
 });
 ////END UPLOAD////
@@ -419,8 +409,7 @@ app.post('/download', (req, res) => {
      })
    }
    else {
-     res.send('{ERROR} Missing or badly formed data sent: ' + JSON.stringify(req.body) + '\n' + '{ERROR} Parameter path not found.');
-     //res.sendStatus(400);
+     res.sendStatus(400);
    }
 });
 ////END DOWNLOAD////

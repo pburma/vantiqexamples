@@ -7,11 +7,8 @@
 <script>
 var obj ={};
 obj.resource = "menu";
-
  $("#button").on("click",function(){
-
-	console.log("uh-huh");
-
+	console.log("Running Select Query");
 		$.ajax({
 		type : 'POST',
 		url: 'http://127.0.0.1:8080/select',
@@ -25,15 +22,11 @@ obj.resource = "menu";
 			$(json).each(function(index, item) {
 				$("body").append("<p>" + item.menuname + "</p>");
     });
-
 		},
 		error : function(xhr, status, error) {
-
 			console.log(JSON.stringify(error));
 		}
 	});
-
-
 });
 </script>
 </body>
