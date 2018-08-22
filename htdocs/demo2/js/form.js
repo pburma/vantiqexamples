@@ -1,3 +1,6 @@
+//This example is basically the same as the server.js one except
+//using forms instead of ajax.
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var Vantiq = require('vantiq-sdk');
