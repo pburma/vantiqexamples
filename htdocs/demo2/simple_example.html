@@ -5,12 +5,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <input id="button" type="button" /> Click Me
 <script>
+
+//Change the obj.resource to the name of an actual type field in your project
 var obj ={};
-obj.resource = "menu";
+obj.resource = "";
  $("#button").on("click",function(){
 	console.log("Running Select Query");
 		$.ajax({
 		type : 'POST',
+    //url is the location where your node server is running, default is shown
 		url: 'http://127.0.0.1:8080/select',
 		data: JSON.stringify(obj),
 		contentType: "application/json; charset=utf-8",

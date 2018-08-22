@@ -1,3 +1,25 @@
+/****************************************
+Instructions for use:
+npm install express
+npm install body-parser
+npm install vantiq-sdk
+npm install cors
+
+To satisfy the Cors cross-origin checking change:
+  app.use(cors({origin: 'http://localhost:8000'}));
+Where origin is set to your webserver host and port.
+
+A token can be obtained from your dev.vantiq.com login.
+Under Operations go to Administer --> Advanced --> Access Tokens
+Generate an access token and set token variable below.
+
+Start node server with:
+node server.js
+
+
+****************************************/
+var token = "";
+
 console.log('Server-side code running');
 
 var express = require('express');
@@ -25,8 +47,7 @@ app.listen(8080, () => {
   console.log('listening on 8080');
 });
 
-vantiq.accessToken = "8D79h2jxhQOjwfpc8bEYT3cXCnX2lyaDFEjwTg_VhbM=";
-//vantiq.accessToken = "<YOUR VANTIQ ACCESS TOKEN>";
+vantiq.accessToken = token;
 
 console.log("Access Token: " + vantiq.accessToken);
 
