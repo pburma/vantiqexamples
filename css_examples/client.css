@@ -1,0 +1,39 @@
+button[id^="Button"] {
+    background-color: white !important; /* Green */
+    border: 2px solid #4CAF50 !important;
+    border-radius: 4px;
+    color: black !important;
+    font-size: 12px !important;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    -webkit-transition-duration: 0.4s !important; /* Safari */
+    transition-duration: 0.4s !important;
+}
+
+button:hover[id^="Button"] {
+    background-color: #4CAF50 !important; /* Green */
+    color: white !important;
+    font-size: 12px !important;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19) !important;
+}
+
+div[id^="MenuButton"]{
+    background-color: #4CAF50 !important; /* Green */
+    padding: 10px 24px;
+    width:100%;
+    color: white !important;
+    -webkit-transition-duration: 0.4s !important; /* Safari */
+    transition-duration: 0.4s !important;
+}
+
+
+div:hover[id^="MenuButton"]{
+    background-color: white !important; /* Green */
+    /* border-radius: 4px; */
+    color: black !important;
+    border: 2px solid #4CAF50 !important;
+}
+
+

@@ -1,0 +1,61 @@
+//Vantiq Menu class
+.vantiqMenuButton {
+	background-color: #57ADEB;
+	padding: 5px 12px;
+	display: inline-block;
+	width:150px;
+	border-radius: 5px;
+	transition: .4s;
+}
+
+.vantiqMenuButton:hover {
+    background-color: rgb(136, 195, 238);
+    transition: .4s;
+}
+
+//Vantiq Data Table class
+.vantiqDataTable {
+    border-radius: 5px;
+}
+
+//Vantiq Vertical Container class
+.vantiqVerticalLayout {
+    border-radius: 5px;
+}
+
+//Vantiq input text class
+.vantiqInputString {
+    border-radius: 5px;
+}
+
+//Similar to vantiqInputString but covers all form elements such as droplists
+.form-control {
+    border-radius: 5px;
+    box-shadow: none;
+    border-color: #57ADEB;
+}
+//Vantiq Button class
+.vantiqButton {
+    text-transform: none;
+    border-radius: 5px;
+    background-color: #EBAF57 !important;
+    border-color: #EBAF57;
+}
+
+.vantiqButton:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+//Vantiq Data Table class row heading
+.vantiqDataTable th {
+	background: #57ADEB;	
+}
+
+//Vantiq Data Table alternate row colors odds and evens
+.vantiqDataTable tr:nth-child(odd) {
+	background: #F5F5F5;	
+}
+
+.vantiqDataTable tr:nth-child(even) {
+	background: #EBAF57;	
+}
