@@ -1,4 +1,4 @@
-//Vantiq Menu class
+/* Vantiq navigation Menu class */
 .vantiqMenuButton {
 	background-color: #57ADEB;
 	padding: 5px 12px;
@@ -13,49 +13,72 @@
     transition: .4s;
 }
 
-//Vantiq Data Table class
+/* Used to indicate current page */
+.menualt {
+	background-color: rgb(136, 195, 238);
+}
+
+/* Vantiq Data Table class */
 .vantiqDataTable {
     border-radius: 5px;
 }
 
-//Vantiq Vertical Container class
-.vantiqVerticalLayout {
-    border-radius: 5px;
-}
-
-//Vantiq input text class
+/* Vantiq input text class 
 .vantiqInputString {
     border-radius: 5px;
 }
+*/
 
-//Similar to vantiqInputString but covers all form elements such as droplists
+/* Similar to vantiqInputString but covers all form elements such as droplists */
 .form-control {
     border-radius: 5px;
     box-shadow: none;
-    border-color: #57ADEB;
+    border-color: #2B6E9E;
 }
-//Vantiq Button class
+/* Vantiq Button class */
 .vantiqButton {
     text-transform: none;
     border-radius: 5px;
-    background-color: #EBAF57 !important;
-    border-color: #EBAF57;
+    background-color: #FFFFFF !important;
+    border-color: #78C6FF #2B6E9E #2B6E9E #78C6FF;
 }
 
 .vantiqButton:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-//Vantiq Data Table class row heading
+/* Vantiq Data Table class row heading */
 .vantiqDataTable th {
 	background: #57ADEB;	
 }
 
-//Vantiq Data Table alternate row colors odds and evens
+/* Vantiq Data Table alternate row colors odds and evens */
 .vantiqDataTable tr:nth-child(odd) {
 	background: #F5F5F5;	
 }
 
 .vantiqDataTable tr:nth-child(even) {
 	background: #EBAF57;	
+}
+
+/* Sidebar drop shadow */
+div#_SidebarScrollingFrame_ {
+    box-shadow: 4px 8px 10px 1px rgba(0,0,0,0.24);
+}
+
+/* Full length of top nav bar */
+.main-header {
+	box-shadow: 3px 4px 10px 0px rgba(0,0,0,0.24);
+}
+
+/* The left half of the top header bar */
+.main-header .logo {
+	background-color: #2B6E9E !important;
+	padding: 0 !important;
+}
+
+/* The right half of the top header bar */
+.navbar {
+	background-color: #2B6E9E !important;
+	
 }
