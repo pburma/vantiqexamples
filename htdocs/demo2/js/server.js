@@ -10,7 +10,7 @@ To satisfy the Cors cross-origin checking change:
 Where origin is set to your webserver host and port.
 
 A token can be obtained from your dev.vantiq.com login.
-Under Operations go to Administer --> Advanced --> Access Tokens
+Under Operations go to Administrator --> Advanced --> Access Tokens
 Generate an access token and set token variable below.
 
 Start node server with:
