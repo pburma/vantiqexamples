@@ -15,7 +15,7 @@ Usage:
 * In these examples the license files (required for Vantiq 1.29+) are individually added using volume mount. Individual files such as those used for white labeling can be added in the same manner. 
 * The image attribute contains the version name to install, this should be changed to the specific version you wish to install. The image names can be found in the Vantiq docker hub repository.
 * Access to the Vantiq image on the Docker Hub website requires a login so please contact Vantiq for both a Docker login and license key. 
-* TLS secrets for HTTPS deployments using a reverse ingress proxy (like Nginx or HAProxy) would need to be added by the user before running. [Docker Secrets](https://docs.docker.com/engine/swarm/secrets/)
+* TLS secrets for HTTPS deployments using an ingress system (like Nginx or HAProxy) would need to be added by the user before running. [Docker Secrets](https://docs.docker.com/engine/swarm/secrets/)
 
 ### Kubernetes
 
