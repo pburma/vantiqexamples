@@ -1,0 +1,1 @@
+Most examples will use docker-compose. The docker-compose can be broken down into docker run command but the docker-compose method simplifies the deployment and can also be converted into a kubernetes yml configs.
