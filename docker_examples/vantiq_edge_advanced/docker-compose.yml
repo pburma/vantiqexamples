@@ -1,0 +1,57 @@
+version: '3.5'
+services:
+  vantiq_edge_mosquitto:
+    image: toke/mosquitto
+    hostname: mqtt.local
+    restart: unless-stopped
+    ports:
+    - 1883:1883
+    networks:
+      vantiq-edge:
+        aliases: []
+  vantiq-edge:
+    environment:
+    #Set your local and remote variables before running.
+    - NODENAME=MyEdgeNode
+    - NODECITY=Denver
+    - NODESTATE=CO
+    - NODEREGION=west
+    - CLOUDTOKEN=<api token>
+    - CLOUDNODENAME=CloudAI_Master
+    image: vantiq/vantiq-edge:1.30-SNAPSHOT
+    links: 
+    - "vantiq_edge_mongo:vantiq_edge_mongo"  
+    - "vantiq_edge_mosquitto:mqtt.local"     
+    depends_on:
+    - vantiq_edge_mongo
+    ports:
+    - 8080:8080
+    restart: unless-stopped
+    volumes:
+    - ./public.pem:/opt/vantiq/config/public.pem
+    - ./license.key:/opt/vantiq/config/license.key
+    - ./wait-for-it.sh:/wait-for-it.sh
+    - ./vantiqedge_bootstrap.py:/vantiqedge_bootstrap.py
+    - ./bootstrap.sh:/bootstrap.sh
+    entrypoint: /bootstrap.sh
+    networks:
+      vantiq-edge:
+        aliases: []
+  vantiq_edge_mongo:
+    image: bitnami/mongodb:4.0.3
+    restart: unless-stopped
+    environment:
+    - MONGODB_USERNAME=<default username>
+    - MONGODB_PASSWORD=<default password>
+    - MONGODB_DATABASE=<default db name>
+    volumes:
+    - vantiq_edge_data:/bitnami:rw
+    networks:
+      vantiq-edge:
+        aliases: []        
+networks:
+  vantiq-edge:
+    ipam:
+      config: []      
+volumes:
+  vantiq_edge_data: {}

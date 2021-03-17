@@ -1,0 +1,36 @@
+version: '3.5'
+services:
+  vantiq-edge:
+    image: vantiq/vantiq-edge:1.30-SNAPSHOT 
+    depends_on:
+    - vantiq_edge_mongo
+    links:
+    - "vantiq_edge_mongo:mongo.local"
+    ports:
+    - 8080:8080
+    restart: unless-stopped
+    volumes:
+    - ./public.pem:/opt/vantiq/config/public.pem
+    - ./license.key:/opt/vantiq/config/license.key
+    - ./mongoDbService.json:/opt/vantiq/config/mongoDbService.json
+    networks:
+      vantiq-edge:
+        aliases: []
+  vantiq_edge_mongo:
+    image: bitnami/mongodb:4.0.3
+    restart: unless-stopped
+    environment:
+    - MONGODB_USERNAME=<custom username>
+    - MONGODB_PASSWORD=<custom password>
+    - MONGODB_DATABASE=<custom database name>
+    volumes:
+    - vantiq_edge_data:/bitnami:rw
+    networks:
+      vantiq-edge:
+        aliases: []        
+networks:
+  vantiq-edge:
+    ipam:
+      config: []      
+volumes:
+  vantiq_edge_data: {}

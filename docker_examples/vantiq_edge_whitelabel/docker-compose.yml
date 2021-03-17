@@ -1,31 +1,29 @@
 version: '3.5'
 services:
   vantiq-edge:
-    #Specify Vantiq image version, contact Vanitq for access to docker hub.
     image: vantiq/vantiq-edge:1.30-SNAPSHOT
-    links:
-    - "vantiq_edge_mongo:vantiq_edge_mongo"    
     depends_on:
     - vantiq_edge_mongo
     ports:
-    #Ports default to 8080 but can be changed.
     - 8080:8080
     restart: unless-stopped
     volumes:
-    #License files are provided by Vantiq Support.
     - ./public.pem:/opt/vantiq/config/public.pem
     - ./license.key:/opt/vantiq/config/license.key
+    - ./webUIConfig.json:/opt/vantiq/config/webUIConfig.json
+    - ./brandedProperties:/opt/vantiq/config/brandedProperties
+    - ./myAppIcon.png:/opt/vantiq/config/myAppIcon.png
+    - ./myNavbarIcon.png:/opt/vantiq/config/myNavbarIcon.png
     networks:
       vantiq-edge:
         aliases: []
   vantiq_edge_mongo:
-    #Mongo is required by Vantiq for storage. 
     image: bitnami/mongodb:4.0.3
     restart: unless-stopped
     environment:
-    - MONGODB_USERNAME=ars
-    - MONGODB_PASSWORD=ars
-    - MONGODB_DATABASE=ars02
+    - MONGODB_USERNAME=<default username>
+    - MONGODB_PASSWORD=<default password>
+    - MONGODB_DATABASE=<default database name>
     volumes:
     - vantiq_edge_data:/bitnami:rw
     networks:
