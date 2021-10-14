@@ -6,5 +6,5 @@ This approach utilizes the bootstrap.sh file as a custom entrypoint script which
 
 The wait-for-it.sh script runs in a wait/loop until the Vantiq port is open and reachable which is necessary in order for the python script to run which is calling the edge nodes rest endpoints to perform the automated operations.
 
-
+This example is similar to the altDockerfile except it does not use a Dockerfile to create a new image and runs all the operations against the base Vantiq image. 
 
