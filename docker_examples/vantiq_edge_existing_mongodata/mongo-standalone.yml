@@ -1,0 +1,9 @@
+version: '3.5'
+services:
+  vantiq_edge_mongo:
+    image: bitnami/mongodb:4.0.3
+    restart: unless-stopped
+    environment:
+    - MONGODB_USERNAME=ars
+    - MONGODB_PASSWORD=ars
+    - MONGODB_DATABASE=ars02

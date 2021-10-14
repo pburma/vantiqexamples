@@ -1,0 +1,26 @@
+# Specify image name
+FROM vantiq/vantiq-edge:1.30.0-SNAPSHOT
+
+# Add license keys to vantiq config dir
+COPY license.key /opt/vantiq/config
+COPY public.pem /opt/vantiq/config
+
+# Add bootstrap scripts
+COPY vantiqedge_bootstrap.py /vantiqedge_bootstrap.py
+COPY wait-for-it.sh /wait-for-it.sh
+
+# Install python
+RUN apt-get update \
+  && apt-get install -y python-pip python-dev \
+  && cd /usr/local/bin \
+  && ln -s /usr/bin/python python \
+  && pip --no-cache-dir install --upgrade pip \
+  && rm -rf /var/lib/apt/lists/*
+
+# Run bootstrap script that adds local and remote node definitions
+RUN /bin/bash -c '/wait-for-it.sh localhost:8080 -t 600; sleep 15; python /vantiqedge_bootstrap.py; echo Bootstrapping completed'
+
+
+
+
+

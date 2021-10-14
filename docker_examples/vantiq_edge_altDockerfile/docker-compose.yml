@@ -1,0 +1,32 @@
+version: '3.5'
+services:
+  vantiq-edge:    
+  build:
+    context: .
+    dockerfile: altDockerfile
+    depends_on:
+    - vantiq_edge_mongo
+    ports:
+    - 8080:8080
+    restart: unless-stopped
+    networks:
+      vantiq-edge:
+        aliases: []
+  vantiq_edge_mongo:
+    image: bitnami/mongodb:4.0.3
+    restart: unless-stopped
+    environment:
+    - MONGODB_USERNAME=<default username>
+    - MONGODB_PASSWORD=<default password>
+    - MONGODB_DATABASE=<default database name>
+    volumes:
+    - vantiq_edge_data:/bitnami:rw
+    networks:
+      vantiq-edge:
+        aliases: []        
+networks:
+  vantiq-edge:
+    ipam:
+      config: []      
+volumes:
+  vantiq_edge_data: {}

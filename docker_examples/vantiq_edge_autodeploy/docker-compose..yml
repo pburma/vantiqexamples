@@ -1,0 +1,37 @@
+version: '3.5'
+services:
+  vantiq-edge:
+    environment:
+    #Set your local and remote variables before running.
+    - NODENAME=<Edge node name>
+    - NODECITY=<optional metadata>
+    - NODESTATE=<optional metadata>
+    - NODEREGION=<optional metadata>
+    - CLOUDTOKEN=<cloud node access token>
+    - CLOUDNODENAME=<Cloud node name>
+    image: vantiq/vantiq-edge:1.30-SNAPSHOT
+    links: 
+    - "vantiq_edge_mongo:vantiq_edge_mongo"     
+    depends_on:
+    - vantiq_edge_mongo
+    ports:
+    - 8080:8080
+    restart: unless-stopped
+    volumes:
+    - ./public.pem:/opt/vantiq/config/public.pem
+    - ./license.key:/opt/vantiq/config/license.key
+    - ./wait-for-it.sh:/wait-for-it.sh
+    - ./vantiqedge_bootstrap.py:/vantiqedge_bootstrap.py
+    - ./bootstrap.sh:/bootstrap.sh
+    entrypoint: /bootstrap.sh
+  vantiq_edge_mongo:
+    image: bitnami/mongodb:4.0.3
+    restart: unless-stopped
+    environment:
+    - MONGODB_USERNAME=<custom username>
+    - MONGODB_PASSWORD=<custom password>
+    - MONGODB_DATABASE=<custom database name>
+    volumes:
+    - vantiq_edge_data:/bitnami:rw     
+volumes:
+  vantiq_edge_data: {}
