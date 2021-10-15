@@ -23,3 +23,6 @@ These examples can be applied to Kubernetes pretty easily. The volume mounts for
 
 One issue that will occur is that the network name for the Mongo connection uses underscores in the name, "vantiq_edge_mongo". This will need to get changed to a hyphen in the K8 ymls. One thing I've done in some instances is use the "links:<hostname>" attribute to set the hostname to communicate between containers but I am not sure how this converts to K8. 
 
+### Licensing 
+  
+wait-for-it.sh is licensed under the [MIT License] https://opensource.org/licenses/MIT
