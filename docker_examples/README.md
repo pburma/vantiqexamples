@@ -25,4 +25,4 @@ One issue that will occur is that the network name for the Mongo connection uses
 
 ### Licensing 
   
-wait-for-it.sh is licensed under the [MIT License] https://opensource.org/licenses/MIT
+wait-for-it.sh is licensed under the [MIT License](https://opensource.org/licenses/MIT)
