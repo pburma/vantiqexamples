@@ -1,0 +1,15 @@
+{
+   "name": "MyEdgeNode1",
+   "nodeConfiguration": {
+       "originatingUri": <uri used to connect to parent>
+      "templateName": "EdgeTemplate",
+      "nodeProperties": {
+         "owner": "test1",
+         "phone": "test1",
+         "location": "test1"
+      },
+      "remoteUri": <uri used by parent to connect to child>,
+      "credentialType": "token",
+      "bootstrapToken": <access-token>
+   }
+}
