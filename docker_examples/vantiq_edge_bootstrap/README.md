@@ -1,8 +1,8 @@
 ### Automate deployment using Vantiq Bootstrap file
 
-This examples uses the Vantiq bootstraping process to onboard edge nodes. The full documenation is listed here [Bootstrapping](http://localhost:8080/docs/system/config/index.html#bootstrapping). 
+This example uses the Vantiq bootstraping process to onboard edge nodes. The full documenation is listed here [Bootstrapping](http://localhost:8080/docs/system/config/index.html#bootstrapping). 
 
-The process requires creating a Node template definition in the parent node which determines the default properties for the new node when it comes online including the connection to the cloud namespace. Once a node template is created a node configuraiton needs to be added which is used by the parent to make a connection to the child namespace. The steps look like this. 
+The process requires creating a Node template definition in the parent node which determines the default properties for the new node when it comes online including the connection to the cloud namespace. Once a node template is created a node configuraiton needs to be added which is used by the parent to make a connection to the child namespace. 
 
 The steps to create and use the bootstrap file will look like this roughly.
 
