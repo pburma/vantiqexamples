@@ -1,7 +1,7 @@
 {
    "name": "MyEdgeNode1",
    "nodeConfiguration": {
-       "originatingUri": <uri used to connect to parent>
+       "originatingUri": <uri used to connect to parent>,
       "templateName": "EdgeTemplate",
       "nodeProperties": {
          "owner": "test1",
