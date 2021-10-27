@@ -21,13 +21,13 @@ SELECT time_bucket('15 minutes', time) AS fifteen_min,
   GROUP BY fifteen_min, sensorid
   ORDER BY fifteen_min DESC, max_speed DESC;
 ```
-The view name max_vtcdata can then be accessed directory at the URL http://<ipaddress>:<port>/max_vtcdata but note that function and stored procedures might appear under different paths such as /rpc/funciton-name.
+The view name max_vtcdata can then be accessed directory at the URL ```http://<ipaddress>:<port>/max_vtcdata``` but note that function and stored procedures might appear under different paths such as /rpc/funciton-name.
 
 When creating new tables make sure to convert the psql table to a Timescale hypertable, when using the timescale docker image it seems to happen automatically.
 
 I used [pgAdmin](https://www.pgadmin.org/) to setup my tables and views in Timescale.
 
-To use with Vantiq setup a source that points to the root of the postgrest server. If doing an edge only connection then http://vantiq_edge_timescale:3000 is the URL to default too based on this sample docker-compose.yml. Change the server hostname to whatever you call the service in that file.
+To use with Vantiq setup a source that points to the root of the postgrest server. If doing an edge only connection then ```http://vantiq_edge_timescale:3000``` is the URL to default too based on this sample docker-compose.yml. Change the server hostname to whatever you call the service in that file. 
 
 A Select is a GET and a Insert is a POST to the tablename in the URL of the postgrest interface. Here is an example of each where the source name is "timescale"
 * Returns a VIEW: ```SELECT FROM SOURCE timescale WITH path = "/avg_speed_daily"```
