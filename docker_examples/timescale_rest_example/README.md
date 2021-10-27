@@ -3,9 +3,10 @@
 This example will load a Vantiq edge node and a timeseries database called Timescale. Timescale is based on Postgres and supports many Postgres extensions. This example also loads Postgrest which adds a Rest API for Timescale.
 
 Doc links:
-[Postgrest with Timescale](https://postgrest.org/en/v5.2/integrations/timescaledb.html#load-sample-data)
-[Postgrest Docker](https://hub.docker.com/u/postgrest)
-[Timescale Docker](https://hub.docker.com/r/timescale/timescaledb)
+
+* [Postgrest with Timescale](https://postgrest.org/en/v5.2/integrations/timescaledb.html#load-sample-data)
+* [Postgrest Docker](https://hub.docker.com/u/postgrest)
+* [Timescale Docker](https://hub.docker.com/r/timescale/timescaledb)
 
 The postgres interface supports many operations like select, insert, update, ect. But the Timescale aggregates are not supported such as select avg(column). In order to access the aggregate queries Views, Functions, Stored Procedures will have to be setup on the Timescale side of things which can then be accessed via Rest.
 
@@ -21,13 +22,13 @@ SELECT time_bucket('15 minutes', time) AS fifteen_min,
   GROUP BY fifteen_min, sensorid
   ORDER BY fifteen_min DESC, max_speed DESC;
 ```
-The view name max_vtcdata can then be accessed directory at the URL http://<ipaddress>:<port>/max_vtcdata but note that function and stored procedures might appear under different paths such as /rpc/funciton-name.
+The view name mydata_view can then be accessed directory at the URL ```http://<ipaddress>:<port>/mydata_view``` but note that function and stored procedures might appear under different paths such as /rpc/funciton-name.
 
-When creating new tables make sure to convert the psql table to a Timescale hypertable, when using the timescale docker image it seems to happen automatically.
+When creating new tables make sure to convert the psql table to a Timescale hypertable, when using the Timescale docker image it seems to happen automatically.
 
 I used [pgAdmin](https://www.pgadmin.org/) to setup my tables and views in Timescale.
 
-To use with Vantiq setup a source that points to the root of the postgrest server. If doing an edge only connection then http://vantiq_edge_timescale:3000 is the URL to default too based on this sample docker-compose.yml. Change the server hostname to whatever you call the service in that file.
+To use with Vantiq setup a source that points to the root of the postgrest server. If doing an edge only connection then ```http://vantiq_edge_timescale:3000``` is the URL to default too based on this sample docker-compose.yml. Change the server hostname to whatever you call the service in that file. 
 
 A Select is a GET and a Insert is a POST to the tablename in the URL of the postgrest interface. Here is an example of each where the source name is "timescale"
 * Returns a VIEW: ```SELECT FROM SOURCE timescale WITH path = "/avg_speed_daily"```
