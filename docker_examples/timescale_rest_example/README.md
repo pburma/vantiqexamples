@@ -22,7 +22,7 @@ SELECT time_bucket('15 minutes', time) AS fifteen_min,
   GROUP BY fifteen_min, sensorid
   ORDER BY fifteen_min DESC, max_speed DESC;
 ```
-The view name max_vtcdata can then be accessed directory at the URL ```http://<ipaddress>:<port>/max_vtcdata``` but note that function and stored procedures might appear under different paths such as /rpc/funciton-name.
+The view name mydata_view can then be accessed directory at the URL ```http://<ipaddress>:<port>/mydata_view``` but note that function and stored procedures might appear under different paths such as /rpc/funciton-name.
 
 When creating new tables make sure to convert the psql table to a Timescale hypertable, when using the Timescale docker image it seems to happen automatically.
 
