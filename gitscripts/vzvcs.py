@@ -1,8 +1,10 @@
 import git
 import os 
 import subprocess
+import shutil, errno
 
 g = git.cmd.Git(os. getcwd())
+project = "VZMain"
 
 def pull():
     print("\nPulls changes from the current folder if *.git is initialized.")
@@ -10,23 +12,25 @@ def pull():
     print(msg)
 
 def vantiqexport():
-    print("Run metadata and data export from Vantiq CLI for project")
-    p1 = subprocess.Popen(["D:/vantiq/vantiq-1.31.17/bin/vantiq.bat", "-s", "internal_vz_cloud_admin", "export", "project", "VZMain", "-d", "D:/vantiq/repos/vz_cloud_admin"])
+    #Full namespace meta and data export
+    print("Run full metadata and data export from Vantiq CLI")
+    p1 = subprocess.Popen(["D:/vantiq/vantiq-1.31.17/bin/vantiq.bat", "-s", "internal_vz_cloud_admin", "export", "-d", "D:/vantiq/repos/vz_cloud_admin"])
     p1.wait()
-    print("Complete project export, starting projectdata export")
-    p2 = subprocess.Popen(["D:/vantiq/vantiq-1.31.17/bin/vantiq.bat", "-s", "internal_vz_cloud_admin", "export", "projectdata", "VZMain", "-d", "D:/vantiq/repos/vz_cloud_admin"])
+
+    print("Complete full metadata export, starting data export")
+    p2 = subprocess.Popen(["D:/vantiq/vantiq-1.31.17/bin/vantiq.bat", "-s", "internal_vz_cloud_admin", "export", "data", "-d", "D:/vantiq/repos/vz_cloud_admin"])
     p2.wait()
     print("Complete data export, job finished")
-    print("Run full metadata and data export from Vantiq CLI")
-    p3 = subprocess.Popen(["D:/vantiq/vantiq-1.31.17/bin/vantiq.bat", "-s", "internal_vz_cloud_admin", "export", "project", "VZMain", "-d", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain"])
-    p3.wait()
-    print("Complete full metadata export, starting data export")
-    p4 = subprocess.Popen(["D:/vantiq/vantiq-1.31.17/bin/vantiq.bat", "-s", "internal_vz_cloud_admin", "export", "projectdata", "VZMain", "-d", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain"])
-    p4.wait()
-    print("Complete data export, job finished")    
 
-def fullsync():
-    print("Perform full sync, project export, git push, git pull") 
+    #Project only data and metadata export
+    print("Run metadata and data export from Vantiq CLI for project")   
+    p3 = subprocess.Popen(["D:/vantiq/vantiq-1.31.17/bin/vantiq.bat", "-s", "internal_vz_cloud_admin", "export", "project", project, "-d", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain"])
+    p3.wait()
+
+    print("Complete project export, starting projectdata export")
+    p4 = subprocess.Popen(["D:/vantiq/vantiq-1.31.17/bin/vantiq.bat", "-s", "internal_vz_cloud_admin", "export", "projectdata", project, "-d", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain"])
+    p4.wait()
+    print("Complete projectdata export, job finished")    
 
 def commit():
     print("Perform git add and then commit")
@@ -39,8 +43,29 @@ def push():
     print("Perform git push to origin using master branch")
     g.push()
 
+def copy():
+    print("Copy missing deployment folders from full backup to project backup")
+    try:
+        shutil.copytree("D:/vantiq/repos/vz_cloud_admin/deployconfigs", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/deployconfigs", dirs_exist_ok=True)
+        shutil.copytree("D:/vantiq/repos/vz_cloud_admin/deployconfigs", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/environments", dirs_exist_ok=True)
+        shutil.copytree("D:/vantiq/repos/vz_cloud_admin/deployconfigs", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/documents", dirs_exist_ok=True)
+    except OSError as exc: # python >2.5
+        if exc.errno in (errno.ENOTDIR, errno.EINVAL):
+            shutil.copy("D:/vantiq/repos/vz_cloud_admin/deployconfigs", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/deployconfigs", dirs_exist_ok=True)
+            shutil.copy("D:/vantiq/repos/vz_cloud_admin/deployconfigs", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/environments", dirs_exist_ok=True)
+            shutil.copy("D:/vantiq/repos/vz_cloud_admin/deployconfigs", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/documents", dirs_exist_ok=True)
+        else: raise    
+
+def fullsync():
+    print("Perform full sync, project export, git push, git pull") 
+    pull()
+    vantiqexport()
+    copy()
+    commit()
+    push()    
+
 def main():
-    choices = 'pull, vantiqexport'
+    choices = 'fullsync, pull, vantiqexport, copy, push, commit'
     print("Commands to use: " + choices)
 
     choose_command = input("Type in the command you want to use: ")
@@ -55,8 +80,14 @@ def main():
     elif choose_command == "commit":
         commit()
 
+    elif choose_command == "push":
+        push()        
+
     elif choose_command == "fullsync":
         fullsync()
+
+    elif choose_command == "copy":
+        copy()        
 
     else:
         print("\nNot a valid command!")
