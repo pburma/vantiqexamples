@@ -52,8 +52,8 @@ def copy():
     except OSError as exc: # python >2.5
         if exc.errno in (errno.ENOTDIR, errno.EINVAL):
             shutil.copy("D:/vantiq/repos/vz_cloud_admin/deployconfigs", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/deployconfigs", dirs_exist_ok=True)
-            shutil.copy("D:/vantiq/repos/vz_cloud_admin/deployconfigs", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/environments", dirs_exist_ok=True)
-            shutil.copy("D:/vantiq/repos/vz_cloud_admin/deployconfigs", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/documents", dirs_exist_ok=True)
+            shutil.copy("D:/vantiq/repos/vz_cloud_admin/environments", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/environments", dirs_exist_ok=True)
+            shutil.copy("D:/vantiq/repos/vz_cloud_admin/documents", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/documents", dirs_exist_ok=True)
         else: raise    
 
 def fullsync():
