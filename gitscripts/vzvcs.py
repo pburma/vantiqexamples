@@ -2,6 +2,7 @@ import git
 import os 
 import subprocess
 import shutil, errno
+import datetime
 
 g = git.cmd.Git(os. getcwd())
 project = "VZMain"
@@ -35,8 +36,10 @@ def vantiqexport():
 def commit():
     print("Perform git add and then commit")
     g.add("*")
-    message = input("\nType in your commit message: ")
-    commit_message = f'{message}'
+    #message = input("\nType in your commit message: ")
+    #commit_message = f'{message}'
+    today = datetime.datetime.now()
+    commit_message = "Daily backup and sync" + today.strftime('%m-%d-%Y')
     g.commit("-m", commit_message)
 
 def push():
