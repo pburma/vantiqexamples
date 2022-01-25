@@ -19,7 +19,7 @@ Usage:
 * Use the Project --> Import button to bring up the import dialog. Drag and drop the Zip file located in this repo into that dialog. 
 * Run the DockerMonitor client. 
 
-You should see the system performance stats for each running container as this time. 
+You should see the system performance stats for each running container. 
 
 ![image](https://user-images.githubusercontent.com/11183903/151065719-3f2ea150-2caf-4054-a8f9-57514c4aa613.png)
 
@@ -28,7 +28,7 @@ You should see the system performance stats for each running container as this t
 * A procedure called listContainers is run by the Client when the page loads. 
 * The listContainers procedure will run getStats and getDiskUsage procedures. 
 * getStats reads the results of /containers/{id}/stats?stream=false to produce the CPU and memory utilization. 
-* getDiskUage uses the API exec feature to run a "df -h" on the containers command line to get disk data and then uses a regex to pull out the disk size/used/available/use% details for the overlay row which is the "/" root filesystem path. 
+* getDiskUage uses the API exec feature to run a "df -h" on the containers command line to get disk data and then uses a regex to pull out the disk size/used/available/use% details for the overlay row which is the "/" root filesystem path. This is a two step process where the /containers/{id}/exec endpoint creates the command request and returns an id and the /exec/{execId}/start endpoint actually runs it.
 
 The client uses a simple data table to display the results. 
 
