@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   vantiq-edge:
-    image: pburma/varmtest:latest
+    image: quay.io/vantiq/vantiq-edge:1.32.6
     links: 
     - "vantiq_edge_mongo:vantiq_edge_mongo"     
     depends_on:

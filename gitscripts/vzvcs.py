@@ -2,6 +2,7 @@ import git
 import os 
 import subprocess
 import shutil, errno
+import datetime
 
 g = git.cmd.Git(os. getcwd())
 project = "VZMain"
@@ -35,8 +36,10 @@ def vantiqexport():
 def commit():
     print("Perform git add and then commit")
     g.add("*")
-    message = input("\nType in your commit message: ")
-    commit_message = f'{message}'
+    #message = input("\nType in your commit message: ")
+    #commit_message = f'{message}'
+    today = datetime.datetime.now()
+    commit_message = "Daily backup and sync" + today.strftime('%m-%d-%Y')
     g.commit("-m", commit_message)
 
 def push():
@@ -47,13 +50,13 @@ def copy():
     print("Copy missing deployment folders from full backup to project backup")
     try:
         shutil.copytree("D:/vantiq/repos/vz_cloud_admin/deployconfigs", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/deployconfigs", dirs_exist_ok=True)
-        shutil.copytree("D:/vantiq/repos/vz_cloud_admin/deployconfigs", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/environments", dirs_exist_ok=True)
-        shutil.copytree("D:/vantiq/repos/vz_cloud_admin/deployconfigs", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/documents", dirs_exist_ok=True)
+        shutil.copytree("D:/vantiq/repos/vz_cloud_admin/environments", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/environments", dirs_exist_ok=True)
+        shutil.copytree("D:/vantiq/repos/vz_cloud_admin/documents", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/documents", dirs_exist_ok=True)
     except OSError as exc: # python >2.5
         if exc.errno in (errno.ENOTDIR, errno.EINVAL):
             shutil.copy("D:/vantiq/repos/vz_cloud_admin/deployconfigs", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/deployconfigs", dirs_exist_ok=True)
-            shutil.copy("D:/vantiq/repos/vz_cloud_admin/deployconfigs", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/environments", dirs_exist_ok=True)
-            shutil.copy("D:/vantiq/repos/vz_cloud_admin/deployconfigs", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/documents", dirs_exist_ok=True)
+            shutil.copy("D:/vantiq/repos/vz_cloud_admin/environments", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/environments", dirs_exist_ok=True)
+            shutil.copy("D:/vantiq/repos/vz_cloud_admin/documents", "D:/vantiq/repos/vz_git/VerizonSOW/VZMain/documents", dirs_exist_ok=True)
         else: raise    
 
 def fullsync():
