@@ -12,8 +12,8 @@ The second part of this is making the API endpoint accessible from inside the co
     - "host.docker.internal:host-gateway"
 
 Usage:
-* Enable the Docker API based on the directions you find from a Google search. (Docker desktop on Windows has a setting you can tick off to enable the tcp daemon)
-* Stop your docker containers if they are running and modify your yml file to include the extra_hosts entry. 
+* Enable the Docker API based on the directions you find from a Google search. (Docker desktop on Windows has a setting you can tick off to enable the tcp daemon). If its working you should be able to navigate to this URL from the host box. http://localhost:2375/v1.41/info
+* Stop your docker containers if they are running and modify your yml file to include the extra_hosts entry. If its working you should be able to ping host.docker.internal from inside the vantiq-edge container.
 * Restart docker and restart your containers (docker-compose down, docker-compose up -d)
 * Log into Vantiq and navigate to a new or existing namespace (anything other than System)
 * Use the Project --> Import button to bring up the import dialog. Drag and drop the Zip file located in this repo into that dialog. 
