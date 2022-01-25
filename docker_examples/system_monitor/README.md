@@ -21,6 +21,8 @@ Usage:
 
 You should see the system performance stats for each running container as this time. 
 
+![image](https://user-images.githubusercontent.com/11183903/151065719-3f2ea150-2caf-4054-a8f9-57514c4aa613.png)
+
 ### How it works
 * A Source called DockerAPI was setup to connect to http://host.docker.internal:2375. 
 * A procedure called listContainers is run by the Client when the page loads. 
