@@ -130,18 +130,25 @@ $.ajax(settings).done(function (response) {
 * Go to Add --> Advanced --> App
 * Provide the name HelloWorld for the app and click OK
 ![image](https://user-images.githubusercontent.com/11183903/156262720-41f27cd2-0bf5-4ee6-9fd9-587aaaa675c2.png)
+
 * Click on the orange box added to the app canvas
 * On the properties pane to the right name this box "Initiate"
 * Select the Click To Edit text on the right properties pane to open the Configuration details
 * Change the inboundResource to "topics" and the inboundResourceId to "/helloworld/in" which should appear in the droplist. 
 ![image](https://user-images.githubusercontent.com/11183903/156262799-92010cab-3c9c-4172-a44a-39ee7e36bdc3.png)
+
 * Click OK to save and notice the orange box is now yellow to indicate a the application is monitoring events that arrive on this topic. 
 ![image](https://user-images.githubusercontent.com/11183903/156262858-a3fa9ad3-f879-4ace-81ba-4682d4d3abf3.png)
+
 * Select the View Task Events bar on the properties pane and send in another HelloWorld event to the system you will see it appear here. If you click on the value that shows up you can pull up an expanded view.
 ![image](https://user-images.githubusercontent.com/11183903/156262898-82b5e451-e252-45dd-a194-2a7ee4890613.png)
+
 * Click on the green button that says "Create Data Type"
+![image](https://user-images.githubusercontent.com/11183903/156265490-7dcebfc8-3a26-4fa9-a956-96cbc8833987.png)
+
 * Change the name to hellodata and the Type Role to "standard" then click Save. This adds a Type which provides a used defined schema in mongo we can save data to. 
 ![image](https://user-images.githubusercontent.com/11183903/156263155-2117951d-fbf9-4f38-a70b-ee1231b587df.png)
+
 * Right click on the Initiate yellow box and select Link New Task
 * From the list of activity patterns select Filter
 * Set the name as Over100 and click OK
@@ -152,19 +159,25 @@ toInteger(event.value) > 100
 ```
 The incoming data is automatically assigned the variable name "event", this means the id and value are referenced as event.id and event.value. Since the value is coming in as a string we will also convert it to an integer which is necessary for this type of conditional expression. 
 ![image](https://user-images.githubusercontent.com/11183903/156263076-a21df725-fd64-4c43-8950-3436988c5e15.png)
+
 * Right click on the Filter activity and select Link New Task again. 
 * Select the SaveToType activity pattern. 
 * Choose the hellodata Type from the droplist and click OK
 ![image](https://user-images.githubusercontent.com/11183903/156263185-ab9d1b22-95c6-4e69-993f-da5502726565.png)
+
 * Save the application by clicking on the disk icon in the top right corner. 
 * Send in another HelloWorld event to the system and notice the badge decorations. These indicate the steps that have been executed by the incoming event. 
 ![image](https://user-images.githubusercontent.com/11183903/156263215-37d6672d-4896-49b8-b180-779a22ba8019.png)
+
 * Notice that all three steps should show a badge decoration, if not then either double check the previous steps and make sure the value in your HelloWorld data is over 100. 
 * To view the data added into the system we can view the records in the Type one way to do this is to pull up the Type itself. To do this expand the "Type" category in the left most navigation pane and select hellodata. 
 * If you click on the Properties tab you can see the schema keys that were automatically setup by our Create Type action earlier. 
 ![image](https://user-images.githubusercontent.com/11183903/156263263-9e7b1d6f-4003-47f6-9e4a-8551e6dc6bc8.png)
+
 * Click on the Show All Records to see the stored data set. 
 ![image](https://user-images.githubusercontent.com/11183903/156263274-d994497f-3cec-4514-9060-b33900c26e0d.png)
 
+You can now send in additional events whose value is over and under 100 where only the values over 100 will be stored. 
+The next step is created a web client to visualize stored and inflight data. 
  
 ## Create simple web client
