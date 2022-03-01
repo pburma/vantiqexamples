@@ -57,6 +57,12 @@ Send data to Vantiq using one of the following methods.
 curl -X POST "http://localhost:8080/api/v1/resources/topics//helloworld/in" -H "Authorization: Bearer <your vantiq access token>" -H "Content-Type:application/json" --data-raw "{\"value\":\"101\", \"id\":\"HelloWorld\"}"
 
 Response true will indicate it is working.
+ 
+Query Params instead of headers. 
+It is possible to use query paramter in the URL instead of auth headers. For that just add the token parameter to the URL. 
+http://localhost:8080/api/v1/resources/topics//helloworld/in?token=<auth-token>
+
+To send a body you still need to use a POST, if you use the GET method you will get the details of the topic back as the response if one is defined.
 
 ### Postman Example
 * POST URL: http://localhost:8080/api/v1/resources/topics//helloworld/in
@@ -112,7 +118,6 @@ $.ajax(settings).done(function (response) {
 });
 ```
 
-
 ## View incoming data 
 1. Inside Vantiq go to Add --> Advanced --> Topic
 2. Click on the blue New Topic button
@@ -122,4 +127,16 @@ $.ajax(settings).done(function (response) {
 
 ## Create Application, save results to mongo
 
+![image](https://user-images.githubusercontent.com/11183903/156262720-41f27cd2-0bf5-4ee6-9fd9-587aaaa675c2.png)
+![image](https://user-images.githubusercontent.com/11183903/156262799-92010cab-3c9c-4172-a44a-39ee7e36bdc3.png)
+![image](https://user-images.githubusercontent.com/11183903/156262858-a3fa9ad3-f879-4ace-81ba-4682d4d3abf3.png)
+![image](https://user-images.githubusercontent.com/11183903/156262898-82b5e451-e252-45dd-a194-2a7ee4890613.png)
+![image](https://user-images.githubusercontent.com/11183903/156263076-a21df725-fd64-4c43-8950-3436988c5e15.png)
+![image](https://user-images.githubusercontent.com/11183903/156263155-2117951d-fbf9-4f38-a70b-ee1231b587df.png)
+![image](https://user-images.githubusercontent.com/11183903/156263185-ab9d1b22-95c6-4e69-993f-da5502726565.png)
+![image](https://user-images.githubusercontent.com/11183903/156263215-37d6672d-4896-49b8-b180-779a22ba8019.png)
+![image](https://user-images.githubusercontent.com/11183903/156263263-9e7b1d6f-4003-47f6-9e4a-8551e6dc6bc8.png)
+![image](https://user-images.githubusercontent.com/11183903/156263274-d994497f-3cec-4514-9060-b33900c26e0d.png)
+
+ 
 ## Create simple web client
