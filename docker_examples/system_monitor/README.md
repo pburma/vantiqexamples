@@ -12,23 +12,25 @@ The second part of this is making the API endpoint accessible from inside the co
     - "host.docker.internal:host-gateway"
 
 Usage:
-* Enable the Docker API based on the directions you find from a Google search. (Docker desktop on Windows has a setting you can tick off to enable the tcp daemon)
-* Stop your docker containers if they are running and modify your yml file to include the extra_hosts entry. 
+* Enable the Docker API based on the directions you find from a Google search. (Docker desktop on Windows has a setting you can tick off to enable the tcp daemon). If its working you should be able to navigate to this URL from the host box. http://localhost:2375/v1.41/info
+* Stop your docker containers if they are running and modify your yml file to include the extra_hosts entry. If its working you should be able to ping host.docker.internal from inside the vantiq-edge container.
 * Restart docker and restart your containers (docker-compose down, docker-compose up -d)
 * Log into Vantiq and navigate to a new or existing namespace (anything other than System)
 * Use the Project --> Import button to bring up the import dialog. Drag and drop the Zip file located in this repo into that dialog. 
 * Run the DockerMonitor client. 
 
-You should see the system performance stats for each running container as this time. 
+You should see the system performance stats for each running container. 
+
+![image](https://user-images.githubusercontent.com/11183903/151065719-3f2ea150-2caf-4054-a8f9-57514c4aa613.png)
 
 ### How it works
 * A Source called DockerAPI was setup to connect to http://host.docker.internal:2375. 
 * A procedure called listContainers is run by the Client when the page loads. 
 * The listContainers procedure will run getStats and getDiskUsage procedures. 
 * getStats reads the results of /containers/{id}/stats?stream=false to produce the CPU and memory utilization. 
-* getDiskUage uses the API exec feature to run a "df -h" on the containers command line to get disk data and then uses a regex to pull out the disk size/used/available/use% details for the overlay row which is the "/" root filesystem path. 
+* getDiskUage uses the API exec feature to run a "df -h" on the containers command line to get disk data and then uses a regex to pull out the disk size/used/available/use% details for the overlay row which is the "/" root filesystem path. This is a two step process where the /containers/{id}/exec endpoint creates the command request and returns an id and the /exec/{execId}/start endpoint actually runs it.
 
 The client uses a simple data table to display the results. 
 
 ### How to use
-The intended purpose of this code is to be able to run periodic checks on the system details and look for problems like low disk space. To implement such an application a Scheduled Event can be created that runs the listContainer code periodically. The easiest way to build a monitor is to create an App that uses basic conditionals to trigger alerts. The scheduled event should run the procedures that need to be modified to output the results to a topic. Your app will then consume the details on that topic and a filter can be added to look for issues like low disk space eg; "event.use < 90%". The downstream event can then send an alert or trigger a collaboration. 
+The intended purpose of this code is to be able to run periodic checks on the system details and look for problems like low disk space. To implement such an application a Scheduled Event can be created that runs the listContainer code periodically. The easiest way to build a monitor is to create an App that uses basic conditionals to trigger alerts. The scheduled event should run the procedures that need to be modified to output the results to a topic. Your app will then consume the details on that topic and a filter can be added to look for issues like low disk space eg; "event.use > 90%". The downstream event can then send an alert or trigger a collaboration. 
