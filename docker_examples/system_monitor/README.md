@@ -6,7 +6,7 @@ This example will use the Docker API to pull system utilization data such as dis
 
 The Docker API has to be made available before the sample project can be used. This means enabling the API for the Windows/Mac/Linux host you are using and also making the API available from inside the container. The instructions seem to vary by OS and there isn't a good guide on the docker website so a Google search is needed here to find the best instructions. 
 
-The second part of this is making the API endpoint accessible from inside the container. There may be different ways to do this but I choose to enable the host.docker.internal URL available from inside the container. To do this modify the Vantiq service entry in the docker-compose.yml to include the following:
+The second part of this is making the API endpoint accessible from inside the container. There may be different ways to do this but I choose to enable the host.docker.internal URL available from inside the container. To do this modify the Vantiq service entry in the [docker-compose.yml](https://github.com/pburma/vantiqexamples/blob/master/docker_examples/vantiq_edge_simple/docker-compose.yml) to include the following:
 
     extra_hosts:
     - "host.docker.internal:host-gateway"
