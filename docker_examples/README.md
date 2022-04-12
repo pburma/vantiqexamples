@@ -21,7 +21,7 @@ Usage:
 
 These examples can be applied to Kubernetes pretty easily. The volume mounts for individual files and TLS secrets would go away and be converted into a configMap and much of the docker\-compose.yml file can be converted using [Kompose](https://kompose.io/) however some additional modifications to the converted .yml should be expected. Kubernetes is used for clustered deployments and one caveat here is that these are all Vantiq Edge examples which means running just 1 instance of each service as Vantiq Edge does not support clustering. 
 
-One issue that will occur is that the network name for the Mongo connection uses underscores in the name, "vantiq_edge_mongo". This will need to get changed to a hyphen in the K8 ymls. One thing I've done in some instances is use the "links:<hostname>" attribute to set the hostname to communicate between containers but I am not sure how this converts to K8. 
+One issue that will occur is that the network name for the Mongo connection uses underscores in the name, "vantiq_edge_mongo". This will need to get changed to a hyphen in the K8 ymls. One thing I've done in some instances is use the "links:<hostname>" attribute to set the hostname as some Vantiq source configurations require a proper URL vs just a service name (eg; mqtt.local) but I am not sure how this converts to K8. 
 
 ### Licensing 
   
