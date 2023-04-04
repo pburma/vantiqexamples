@@ -1,7 +1,9 @@
+# About: 
+# Python example of connecting to the Vantiq websocket endpoint. 
+# The script will authenticate with an access token, publish two JSON payloads and run a Select statement. 
 # Instructions :
-#    pip install websocket-client
-# Log into your Vantiq server and create an access token. 
-# Set the correct URL, Token and Topic name values below
+#   pip install websocket-client
+# Set the correct URL, Token and Topic name variables below.
 
 import websocket
 import json
