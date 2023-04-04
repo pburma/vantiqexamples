@@ -14,7 +14,7 @@ except ImportError:
 import time
 
 URL = "wss://internal.vantiq.com/api/v1/wsock/websocket"
-Token = "H-lPZlRM3x2aXisFPl4YkZKpD5ACvLAZq-MoGcB1Teo="
+Token = "<your-vantiq-token>"
 Topic = "/devicedata"
 Payload1 = {"requestId": "Publish123"}
 Payload2 =  {"datakey": "datavalue"}
